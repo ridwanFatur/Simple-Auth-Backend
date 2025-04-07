@@ -15,8 +15,8 @@ A Django project implementing JWT authentication with email verification and two
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ridwanFatur/django-simple-auth.git
-   cd django-simple-auth
+   git clone https://github.com/ridwanFatur/Simple-Auth-Backend
+   cd Simple-Auth-Backend
    ```
 
 2. Create and activate a virtual environment:
