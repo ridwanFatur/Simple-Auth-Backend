@@ -1,0 +1,4 @@
+{
+  "flake8.args": ["--max-line-length=120"],
+  "editor.rulers": [120]
+}
