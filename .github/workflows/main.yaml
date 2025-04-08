@@ -35,3 +35,27 @@ jobs:
           context: .
           push: true
           tags: ${{ env.DOCKER_REPO }}
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Update Docker on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.SERVER_HOST }}
+          username: ${{ env.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd ${{ env.APP_PATH }}
+            docker-compose down
+            docker pull ${{ env.DOCKER_REPO }}
+            docker-compose up -d
+            docker image prune -f
+
+      - name: Deployment Status
+        run: echo "Deployment completed successfully!"
