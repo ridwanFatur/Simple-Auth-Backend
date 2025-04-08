@@ -9,6 +9,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+RUN chmod +x /app/bin/django.sh
 
 EXPOSE 8000
 
