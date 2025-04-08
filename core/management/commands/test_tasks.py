@@ -11,7 +11,8 @@ from users.models import UserModel
 
 class Command(BaseCommand):
     def execute(self, *args, **options):
-        get_all_requirements()
+        print("Only This")
+        # get_all_requirements()
         # test_send_email_verification()
         # test_send_email()
         pass
