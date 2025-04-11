@@ -32,6 +32,8 @@ INSTALLED_APPS = [
 
 # Middleware
 MIDDLEWARE = [
+		# Extended
+    "corsheaders.middleware.CorsMiddleware",
     # Default
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -40,8 +42,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # Extended
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ## Extended settings

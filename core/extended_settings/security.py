@@ -5,8 +5,6 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
 CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
 
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS").split(",")
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 SITE_URL = os.getenv("SITE_URL")
