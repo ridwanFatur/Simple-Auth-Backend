@@ -43,7 +43,7 @@ class AuthenticationAPIUtils:
         user.last_login = now()
         user.save(update_fields=["last_login"])
 
-        VerificationService.send_verification_email(user)
+        # VerificationService.send_verification_email(user)
 
         serializer_payload = AuthenticationService.get_user_with_token_payload(user)
         return Response(
