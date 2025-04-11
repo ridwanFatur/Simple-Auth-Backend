@@ -3,7 +3,8 @@ import os
 DEBUG = os.environ.get("DEBUG").lower() in ("true", "1", "t")
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
 CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
-CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS").split(",")
+# CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS").split(",")
+CORS_ALLOWED_ORIGINS = ["https://simple-auth.ridwanfatur.site"]
 CORS_ALLOW_CREDENTIALS = True
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
