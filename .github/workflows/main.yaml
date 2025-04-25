@@ -6,12 +6,6 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  SERVER_HOST: ${{ secrets.SERVER_HOST }}
-  SERVER_USER: ${{ secrets.SERVER_USER }}
-  APP_PATH: ${{ secrets.APP_PATH }}
-  DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -34,26 +28,26 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.DOCKER_REPO }}
+          tags: ${{ secrets.DOCKER_REPO }}
 
       - name: Setup SSH Key
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
       - name: Update Docker on server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ env.SERVER_HOST }}
-          username: ${{ env.SERVER_USER }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd ${{ env.APP_PATH }}
+            cd ${{ secrets.APP_PATH }}
             docker-compose down
-            docker pull ${{ env.DOCKER_REPO }}
+            docker pull ${{ secrets.DOCKER_REPO }}
             docker-compose up -d
             docker image prune -f
 
